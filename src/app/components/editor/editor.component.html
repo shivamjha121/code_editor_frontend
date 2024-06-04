@@ -1,0 +1,30 @@
+<h1 class="text-center text-3xl font-bold " style="margin: 0px; padding: 10px; background-color: rgb(24, 24, 21); color: rgb(255, 255, 255);">Code Editor</h1>
+
+<div style="display: flex; justify-content: left; margin: 0; padding: 0px">
+   
+   <div style="width: 70%">   
+      <div *ngIf="lang">
+         <h1 style="margin: 0; padding: 10px; background-color: rgb(24, 22, 22); color: rgb(255, 255, 255);">{{lang}}</h1>
+      </div>
+
+    <ngx-monaco-editor  [options]="{theme: 'vs-dark', language: lang, automaticLayout: true, scrollBeyondLastLine: false,fontSize: 14}" (onInit)="onMonacoInit($event)" (ngModelChange)="onMonacoChange($event)" [(ngModel)]="code" style="height: 450px;"></ngx-monaco-editor >
+        <!-- <div id="editor" #editor style="height: 450px;"></div> -->
+   </div>
+        
+   <div style="width: 30%; height: 480px; ; background-color: rgb(23, 23, 21); " >
+           <div style="margin: 10px; padding: 10px ; display: flex">
+            <div *ngIf="languages">
+               <select name="language" id="language" style="background-color: rgb(24, 22, 22); width: 100%; color: rgb(255, 255, 255); margin: 0; padding: 10px;border: 1px solid green;" (change)="selectedLanguage($event)">
+                 <option value="" selected disabled>Select Language</option>
+                <option  *ngFor="let language of languages" [value]="language.language" >{{language.name}}</option>
+             </select> 
+            </div>
+            <button style="color: rgb(53, 22, 22); background-color: rgb(19, 212, 80); border: 1px solid black; display: block; margin: 10px;" (click)="runCode()">Run Code</button>
+            <button style="color: rgb(53, 22, 22); background-color: rgb(19, 212, 80); border: 1px solid black; display: block; margin: 10px;" (click)="saveCode()">Save Code</button>
+           </div>
+            <textarea id="output" name="output" style="width: 100%; height: 400px; background-color: rgb(53, 53, 51); color: rgb(255, 255, 255);" [value]="outPut"></textarea>
+
+        
+    </div>
+</div>
+
